@@ -53,6 +53,7 @@ kotlin {
             configInterop(target)
         }
 
+    applyDefaultHierarchyTemplate()
     sourceSets {
         all {
             languageSettings.apply {
@@ -69,40 +70,6 @@ kotlin {
         commonTest {
             dependencies {
                 implementation(kotlin("test"))
-            }
-        }
-
-        val nativeCommonMain = sourceSets.maybeCreate("nativeCommonMain")
-        val nativeCommonTest = sourceSets.maybeCreate("nativeCommonTest")
-
-        val appleMain = sourceSets.maybeCreate("appleMain").apply {
-            dependsOn(nativeCommonMain)
-        }
-        val linuxMain = sourceSets.maybeCreate("linuxX64Main").apply {
-            dependsOn(nativeCommonMain)
-        }
-        
-        val mingwMain = sourceSets.maybeCreate("mingwMain").apply {
-            dependsOn(nativeCommonMain)
-        }
-
-        val mingwX64Main = sourceSets.maybeCreate("mingwX64Main").apply {
-            dependsOn(mingwMain)
-        }
-
-        knTargets.forEach { target ->
-            when {
-                target.name.startsWith("mingw") -> {
-                    target.compilations.getByName("main").defaultSourceSet.dependsOn(mingwMain)
-                    target.compilations.getByName("test").defaultSourceSet.dependsOn(nativeCommonTest)
-                }
-                target.name.startsWith("linux") -> {
-                    target.compilations.getByName("test").defaultSourceSet.dependsOn(nativeCommonTest)
-                }
-                else -> {
-                    target.compilations.getByName("main").defaultSourceSet.dependsOn(appleMain)
-                    target.compilations.getByName("test").defaultSourceSet.dependsOn(nativeCommonTest)
-                }
             }
         }
     }
