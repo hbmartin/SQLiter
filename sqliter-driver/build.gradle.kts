@@ -27,7 +27,6 @@ fun configInterop(target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTar
                 "-L/usr/lib/x86_64-linux-gnu",
                 "-L/usr/lib",
                 "-L/usr/lib64",
-                "--allow-shlib-undefined",
             )
             HostManager.hostIsMingw -> listOf("-Lc:\\msys64\\mingw64\\lib", "-L$rootDir\\libs\\windows", "-lsqlite3")
             else -> listOf("-lsqlite3")
