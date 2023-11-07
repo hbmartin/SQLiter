@@ -21,8 +21,7 @@ jobs:
 
       - name: Run script file
         run: |
-          pwd
-          ls -l
+          sudo apt-get install msgfmt -y
           python glibc_version_header_gen.py -v 2.34
           ls -l
           ls -lR version_headers
