@@ -20,7 +20,14 @@ fun configInterop(target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTar
 
     target.binaries.all {
         linkerOpts += when {
-            HostManager.hostIsLinux -> listOf("-lsqlite3", "-L$rootDir/libs/linux", "-L/usr/lib/x86_64-linux-gnu", "-L/usr/lib", "-L/usr/lib64")
+            HostManager.hostIsLinux -> listOf(
+                "-include src/include/force_link_glibc_2.19.h",
+                "-lsqlite3",
+                "-L$rootDir/libs/linux",
+                "-L/usr/lib/x86_64-linux-gnu",
+                "-L/usr/lib",
+                "-L/usr/lib64",
+            )
             HostManager.hostIsMingw -> listOf("-Lc:\\msys64\\mingw64\\lib", "-L$rootDir\\libs\\windows", "-lsqlite3")
             else -> listOf("-lsqlite3")
         }
