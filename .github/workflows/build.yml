@@ -15,13 +15,13 @@ jobs:
         os: [ ubuntu-22.04 ]
 #        os: [ macOS-latest, windows-latest, ubuntu-22.04 ]
     runs-on: ${{matrix.os}}
-    container: ubuntu:trusty
     steps:
       - name: Run script file
         run: |
           ls -l /usr/lib/x86_64-linux-gnu/libsqlite3*
           sudo apt install libsqlite3-dev -y
           sqlite3 --version || echo "not found"
+          strings /usr/lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC
         shell: bash
 
       - name: Checkout the repo
