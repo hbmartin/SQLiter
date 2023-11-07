@@ -1,6 +1,0 @@
-package = co.touchlab.sqliter.force_link_glibc
-headers = force_link_glibc_2.19.h
-headerFilter = force_link_glibc_2.19*.h
-
-linkerOpts.linux_x64 = -lpthread -ldl
-

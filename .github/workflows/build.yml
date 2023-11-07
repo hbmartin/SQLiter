@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: Run script file
         run: |
+          python glibc_version_header_gen.py -v 2.34
+          ls -l
+          ls -lR version_headers
+          cat version_headers/x64/2.34.h
           ls -l /usr/lib/x86_64-linux-gnu/libsqlite3*
           sudo apt install libsqlite3-dev -y
           sqlite3 --version || echo "not found"
