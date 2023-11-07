@@ -355,6 +355,7 @@ SUPPORTED_VERSIONS = [
     Version(2, 25),
     Version(2, 26),
     Version(2, 27),
+    Version(2, 34),
 ]
 
 
